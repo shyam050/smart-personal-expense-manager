@@ -8,7 +8,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-
+import com.expense.manager.entity.Transaction.TransactionType;
+import java.time.LocalDate;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
@@ -69,6 +70,18 @@ public interface TransactionRepository extends JpaRepository<Transaction, Long> 
         @Param("startDate") LocalDate startDate,
         @Param("endDate") LocalDate endDate
     );
+    @Query("SELECT YEAR(t.transactionDate) as year, MONTH(t.transactionDate) as month, " +
+       "t.category.name as category, SUM(t.amount) as total " +
+       "FROM Transaction t WHERE t.user.id = :userId " +
+       "AND t.type = :type " +
+       "AND t.transactionDate >= :since " +
+       "GROUP BY YEAR(t.transactionDate), MONTH(t.transactionDate), t.category.name " +
+       "ORDER BY year ASC, month ASC")
+       List<Object[]> getMonthlyCategoryBreakdown(
+       @Param("userId") Long userId,
+       @Param("since") LocalDate since,
+       @Param("type") TransactionType type
+       );
 
     Optional<Transaction> findByIdAndUserId(Long id, Long userId);
 

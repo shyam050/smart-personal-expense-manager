@@ -4,11 +4,11 @@ import { DashboardService } from '../../core/services/dashboard.service';
 import { Dashboard } from '../../core/models/models';
 import { BaseChartDirective } from 'ng2-charts';
 import { ChartConfiguration, ChartData } from 'chart.js';
-
+import { ForecastCardComponent } from '../dashboard/forecast-card.component';
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [ShellComponent, BaseChartDirective],
+  imports: [ShellComponent, BaseChartDirective, ForecastCardComponent],
   template: `
     <div class="layout">
       <app-shell></app-shell>
@@ -77,9 +77,14 @@ import { ChartConfiguration, ChartData } from 'chart.js';
               }
             </section>
           </div>
+          <br>
+          <app-forecast-card></app-forecast-card>
         }
+          
       </main>
+      
     </div>
+    
   `,
   styles: [`
     .layout {
