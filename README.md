@@ -4,7 +4,7 @@ A full-stack personal finance application built with Spring Boot and Angular, fe
 
 ## Architecture
 
-```text id="u80mk3"
+```text
 Angular Frontend
        │
        ▼
@@ -41,26 +41,26 @@ Spring Boot ──────→ Database
 
 ### Core Features
 
-* User registration and login with JWT authentication
-* Add, edit, and delete income and expense transactions
-* Category management with color coding
-* Dashboard with income vs expense and category-wise spending charts
-* Paginated and filterable transaction history
+- User registration and login with JWT authentication
+- Add, edit, and delete income and expense transactions
+- Category management with color coding
+- Dashboard with income vs expense and category-wise spending charts
+- Paginated and filterable transaction history
 
 ### Budget Forecasting
 
-* Predicts next month's spending for each category
-* Uses a weighted moving average based on previous monthly spending
-* Gives higher importance to recent spending
-* Displays forecasted spending and trend direction for each category
+- Predicts next month's spending for each category
+- Uses a weighted moving average based on previous monthly spending
+- Gives higher importance to recent spending
+- Displays forecasted spending and trend direction for each category
 
 ### Automatic Transaction Categorization
 
-* Suggests a category based on the merchant or transaction description
-* Uses keyword matching for known merchants
-* Uses TF-IDF and Naive Bayes classification for other merchant names
-* Suggestions appear while entering a transaction and can be applied by the user
-* Supports categories including Food, Transport, Entertainment, Shopping, Utilities, Health, Education, and Travel
+- Suggests a category based on the merchant or transaction description
+- Uses keyword matching for known merchants
+- Uses TF-IDF and Naive Bayes classification for other merchant names
+- Suggestions appear while entering a transaction and can be applied by the user
+- Supports Food, Transport, Entertainment, Shopping, Utilities, Health, Education, and Travel categories
 
 ## API Endpoints
 
@@ -81,16 +81,16 @@ Spring Boot ──────→ Database
 
 ## Database Design
 
-* Separate tables for users, categories, and transactions with foreign-key relationships
-* Database-side aggregation using `GROUP BY` and `SUM` for dashboard and forecasting queries
-* Composite indexes for commonly filtered user transaction queries
-* Database connection pooling using HikariCP
+- Separate tables for users, categories, and transactions with foreign-key relationships
+- Database-side aggregation using `GROUP BY` and `SUM` for dashboard and forecasting queries
+- Composite indexes for commonly filtered user transaction queries
+- Database connection pooling using HikariCP
 
 ## Project Structure
 
-```text id="0x5r99"
-expense-manager/
-├── backend/
+```text
+smart-personal-expense-manager/
+├── expense-manager-backend/
 │   └── src/main/java/com/expense/manager/
 │       ├── config/
 │       ├── controller/
@@ -107,35 +107,38 @@ expense-manager/
 │   ├── training_data.py
 │   └── requirements.txt
 │
-├── frontend/
+│
+├── expense-manager-frontend/
 │   └── src/app/
 │       ├── core/
 │       └── features/
-│
-└── seed_data.py
+├── seed_data.py
+└── README.md
 ```
 
 ## Running Locally
 
 ### Backend
 
-```bash id="gsr74n"
-cd backend
+```bash
+cd expense-manager-backend
 mvn spring-boot:run
 ```
 
 Spring Boot API:
 
-```text id="dlszby"
+```text
 http://localhost:8080
 ```
 
 ### Categorization Service
 
-```bash id="7a5c19"
+```bash
 cd categorization-service
 
 python -m venv venv
+
+# Windows
 venv\Scripts\activate
 
 pip install -r requirements.txt
@@ -146,20 +149,20 @@ python app.py
 
 Categorization API:
 
-```text id="ktkn45"
+```text
 http://localhost:5000
 ```
 
 ### Frontend
 
-```bash id="tfb9ja"
-cd frontend
+```bash
+cd expense-manager-frontend
 npm install
 npm start
 ```
 
 Angular application:
 
-```text id="l90e2p"
+```text
 http://localhost:4200
 ```
